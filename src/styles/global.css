@@ -36,17 +36,18 @@
   text-decoration: none;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
-    background-color 0.2s var(--ease-smooth);
+  transition: transform 0.14s var(--ease-out),
+    background-color 0.14s var(--ease-smooth);
 }
 
 .header-back-btn:hover {
-  transform: translateX(-2px) scale(1.04);
+  transform: none;
   background: var(--card-bg-hover, rgba(0, 0, 0, 0.05));
 }
 
 .header-back-btn:active {
-  transform: scale(0.95);
+  transform: scale(0.96);
+  transition-duration: 0.08s;
 }
 
 :global(html.dark) .header-back-btn:hover,
@@ -100,30 +101,32 @@ html.dark .header-back-btn:hover {
   font-weight: 500;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  transition: color 0.2s var(--ease-smooth),
-    background-color 0.2s var(--ease-smooth),
-    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: color 0.14s var(--ease-smooth),
+    background-color 0.14s var(--ease-smooth),
+    transform 0.14s var(--ease-out);
   user-select: none;
 }
 
 .header-sponsor-btn:hover {
   color: var(--heading);
-  transform: scale(1.03);
+  transform: none;
+  background: var(--card-bg-hover, rgba(0, 0, 0, 0.05));
 }
 
 .header-sponsor-btn:active {
-  transform: scale(0.95);
+  transform: scale(0.96);
+  transition-duration: 0.08s;
 }
 
 .sponsor-heart-icon {
   color: #ff63a5;
   display: block;
   flex-shrink: 0;
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: transform 0.14s var(--ease-out);
 }
 
 .header-sponsor-btn:hover .sponsor-heart-icon {
-  transform: scale(1.18);
+  transform: scale(1.08);
 }
 
 .header-github-btn {
@@ -142,19 +145,21 @@ html.dark .header-back-btn:hover {
   font-weight: 500;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  transition: color 0.2s var(--ease-smooth),
-    background-color 0.2s var(--ease-smooth),
-    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: color 0.14s var(--ease-smooth),
+    background-color 0.14s var(--ease-smooth),
+    transform 0.14s var(--ease-out);
   user-select: none;
 }
 
 .header-github-btn:hover {
   color: var(--heading);
-  transform: scale(1.03);
+  transform: none;
+  background: var(--card-bg-hover, rgba(0, 0, 0, 0.05));
 }
 
 .header-github-btn:active {
-  transform: scale(0.95);
+  transform: scale(0.96);
+  transition-duration: 0.08s;
 }
 
 .header-github-btn svg {
@@ -345,12 +350,12 @@ html.dark .header-back-btn:hover {
   display: block;
   margin: 0 auto;
   overflow: visible;
-  transition: transform 0.2s cubic-bezier(0.19, 1, 0.22, 1);
+  transition: transform 0.15s var(--ease-out);
   will-change: transform;
 }
 
 .brand-card:hover .icon-box svg {
-  transform: scale(1.08);
+  transform: scale(1.04);
 }
 
 .icon-title {
@@ -436,8 +441,8 @@ html.dark .header-back-btn:hover {
   font-size: 13px;
   font-weight: 500;
   cursor: pointer;
-  transition: color 0.2s var(--ease-smooth),
-    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: color 0.14s var(--ease-smooth),
+    transform 0.12s var(--ease-out);
   white-space: nowrap;
 }
 
@@ -447,7 +452,8 @@ html.dark .header-back-btn:hover {
 }
 
 .view-btn:active {
-  transform: scale(0.92);
+  transform: scale(0.96);
+  transition-duration: 0.08s;
 }
 
 .style-toggle-pill {
@@ -499,8 +505,8 @@ html.dark .header-back-btn:hover {
   font-size: 13px;
   font-weight: 500;
   cursor: pointer;
-  transition: color 0.2s var(--ease-smooth),
-    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: color 0.14s var(--ease-smooth),
+    transform 0.12s var(--ease-out);
   white-space: nowrap;
 }
 
@@ -510,7 +516,8 @@ html.dark .header-back-btn:hover {
 }
 
 .style-btn:active {
-  transform: scale(0.92);
+  transform: scale(0.96);
+  transition-duration: 0.08s;
 }
 
 .btn {
@@ -527,11 +534,12 @@ html.dark .header-back-btn:hover {
   cursor: pointer;
   width: 100%;
   white-space: nowrap;
-  transition: background-color 0.2s var(--ease-smooth), opacity 0.2s var(--ease-smooth), transform 0.15s ease;
+  transition: background-color 0.14s var(--ease-smooth), opacity 0.14s var(--ease-smooth), transform 0.12s var(--ease-out);
 }
 
 .btn:active {
-  transform: scale(0.97);
+  transform: scale(0.96);
+  transition-duration: 0.08s;
 }
 
 .btn-primary {
@@ -1175,13 +1183,18 @@ html.dark .header-back-btn:hover {
   cursor: pointer;
   perspective: 900px;
   transition: background-color var(--duration-smooth) var(--ease-smooth),
-    transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform 0.14s var(--ease-out);
   box-sizing: border-box;
   user-select: none;
 }
 
 .random-preview-card:hover {
-  transform: translateY(-2px);
+  transform: none;
+}
+
+.random-preview-card:active {
+  transform: scale(0.985);
+  transition-duration: 0.08s;
 }
 
 .random-shape-wrapper {
@@ -1213,20 +1226,16 @@ html.dark .header-back-btn:hover {
 }
 
 .random-svg-box.is-shaking svg {
-  animation: randomShapeFluidPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: randomShapeFluidPop 0.32s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 @keyframes randomShapeFluidPop {
   0% {
-    transform: scale(0.86) rotate(-5deg);
+    transform: scale(0.92) rotate(-3deg);
   }
 
-  42% {
-    transform: scale(1.12) rotate(4deg);
-  }
-
-  72% {
-    transform: scale(0.96) rotate(-1.5deg);
+  50% {
+    transform: scale(1.05) rotate(2deg);
   }
 
   100% {
@@ -1300,16 +1309,21 @@ html.dark .header-back-btn:hover {
   cursor: pointer;
   padding: 0;
   position: relative;
-  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s var(--ease-smooth);
+  transition: transform 0.14s var(--ease-out), box-shadow 0.14s var(--ease-smooth);
 }
 
 .random-swatch:hover {
-  transform: scale(1.18);
+  transform: scale(1.08);
 }
 
 .random-swatch.active {
-  transform: scale(1.1);
+  transform: scale(1.04);
   box-shadow: 0 0 0 2px var(--card-bg), 0 0 0 4px currentColor;
+}
+
+.random-swatch:active {
+  transform: scale(0.95);
+  transition-duration: 0.08s;
 }
 
 .random-primary-action-wrap {
@@ -1336,18 +1350,19 @@ html.dark .header-back-btn:hover {
   font-weight: 600;
   cursor: pointer;
   box-sizing: border-box;
-  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
-    background-color 0.2s ease,
-    opacity 0.2s ease;
+  transition: transform 0.14s var(--ease-out),
+    background-color 0.14s ease,
+    opacity 0.14s ease;
 }
 
 .random-shake-btn:hover {
-  transform: translateY(-2px) scale(1.02);
+  transform: none;
   background: #27272a;
 }
 
 .random-shake-btn:active {
-  transform: translateY(0) scale(0.97);
+  transform: scale(0.96);
+  transition-duration: 0.08s;
 }
 
 :global(html.dark) .random-shake-btn,
@@ -1384,16 +1399,17 @@ html.dark .random-shake-btn:hover {
   cursor: pointer;
   padding: 0 16px;
   box-sizing: border-box;
-  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
-    background-color 0.18s ease;
+  transition: transform 0.14s var(--ease-out),
+    background-color 0.14s ease;
 }
 
 .random-export-pill:hover {
-  transform: translateY(-1px);
+  transform: none;
 }
 
 .random-export-pill:active {
-  transform: translateY(0) scale(0.97);
+  transform: scale(0.96);
+  transition-duration: 0.08s;
 }
 
 .random-export-pill-primary {

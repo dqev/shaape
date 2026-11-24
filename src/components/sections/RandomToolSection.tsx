@@ -23,20 +23,20 @@ const CATEGORIES: TabItem[] = [
   { id: 'flowers', label: 'Flowers' },
 ];
 
-const STYLES: TabItem[] = [
-  { id: 'normal', label: 'Normal' },
-  { id: 'gradient', label: 'Gradient' },
-  { id: 'grainy', label: 'Grainy' },
-];
-
 export interface RandomToolSectionProps {
   isVisible: boolean;
+  styleMode?: string;
+  onStyleChange?: (style: string) => void;
 }
 
-export const RandomToolSection: React.FC<RandomToolSectionProps> = ({ isVisible }) => {
+export const RandomToolSection: React.FC<RandomToolSectionProps> = ({
+  isVisible,
+  styleMode = 'gradient',
+  onStyleChange,
+}) => {
   const [currentCategory, setCurrentCategory] = useState<string>('random');
   const [currentColor, setCurrentColor] = useState<string>('#ff7a00');
-  const [currentStyle, setCurrentStyle] = useState<string>('gradient');
+  const [currentStyle, setCurrentStyle] = useState<string>(styleMode);
   const [currentShape, setCurrentShape] = useState<GeneratedShape | null>(null);
   const [isShaking, setIsShaking] = useState<boolean>(false);
   const [isCopied, setIsCopied] = useState<boolean>(false);
@@ -45,7 +45,8 @@ export const RandomToolSection: React.FC<RandomToolSectionProps> = ({ isVisible 
   const copyBtnRef = useRef<HTMLButtonElement | null>(null);
 
   const shakeShape = (animate: boolean = true) => {
-    const shape = generate(currentCategory, currentColor, currentStyle);
+    const activeStyle = styleMode || currentStyle;
+    const shape = generate(currentCategory, currentColor, activeStyle);
     setCurrentShape(shape);
 
     if (animate) {
@@ -55,6 +56,12 @@ export const RandomToolSection: React.FC<RandomToolSectionProps> = ({ isVisible 
       });
     }
   };
+
+  useEffect(() => {
+    if (styleMode && styleMode !== currentStyle) {
+      handleStyleChange(styleMode);
+    }
+  }, [styleMode]);
 
   useEffect(() => {
     if (isVisible && !currentShape) {
@@ -85,13 +92,13 @@ export const RandomToolSection: React.FC<RandomToolSectionProps> = ({ isVisible 
     svgBoxRef.current.style.transform = `translate(${nx * 8}px, ${ny * 8}px) scale(${
       1 + 0.03 * Math.abs(nx * ny)
     }) rotate(${nx * 2}deg)`;
-    svgBoxRef.current.style.transition = 'transform 250ms cubic-bezier(0.34, 1.56, 0.64, 1)';
+    svgBoxRef.current.style.transition = 'transform 140ms cubic-bezier(0.23, 1, 0.32, 1)';
   };
 
   const handleCardMouseLeave = () => {
     if (!svgBoxRef.current) return;
     svgBoxRef.current.style.transform = 'translate(0px, 0px) scale(1) rotate(0deg)';
-    svgBoxRef.current.style.transition = 'transform 600ms cubic-bezier(0.34, 1.56, 0.64, 1)';
+    svgBoxRef.current.style.transition = 'transform 250ms cubic-bezier(0.23, 1, 0.32, 1)';
   };
 
   const handleCategoryChange = (cat: string) => {
@@ -104,6 +111,9 @@ export const RandomToolSection: React.FC<RandomToolSectionProps> = ({ isVisible 
 
   const handleStyleChange = (style: string) => {
     setCurrentStyle(style);
+    if (onStyleChange) {
+      onStyleChange(style);
+    }
     if (currentShape) {
       const newLighting =
         !currentShape.lighting || currentShape.lighting.color !== currentColor
@@ -168,19 +178,6 @@ export const RandomToolSection: React.FC<RandomToolSectionProps> = ({ isVisible 
 
   return (
     <section className="random-tool-section" id="randomToolSection">
-      {/* Category Filter using FluidTabs */}
-      <div className="random-category-tabs-wrapper">
-        <FluidTabs
-          tabs={CATEGORIES}
-          activeId={currentCategory}
-          onChange={handleCategoryChange}
-          className="random-cat-fluid-pill"
-          sliderClassName="view-slider"
-          btnClassName="view-btn"
-          ariaLabel="Category filter"
-        />
-      </div>
-
       {/* Main Interactive Stage */}
       <div className="random-stage-card-wrapper">
         <SquircleCard
@@ -225,17 +222,17 @@ export const RandomToolSection: React.FC<RandomToolSectionProps> = ({ isVisible 
         </SquircleCard>
       </div>
 
-      {/* Controls: Style Switcher & Swatches */}
+      {/* Controls: Category Filter & Color Swatches */}
       <div className="random-controls-panel">
         <div className="random-controls-row">
           <FluidTabs
-            tabs={STYLES}
-            activeId={currentStyle}
-            onChange={handleStyleChange}
-            className="style-toggle-pill"
-            sliderClassName="style-slider"
-            btnClassName="style-btn"
-            ariaLabel="Shape style switcher"
+            tabs={CATEGORIES}
+            activeId={currentCategory}
+            onChange={handleCategoryChange}
+            className="random-cat-fluid-pill"
+            sliderClassName="view-slider"
+            btnClassName="view-btn"
+            ariaLabel="Category filter"
           />
 
           <div className="random-palette-row" id="randomPalette" role="radiogroup" aria-label="Color palette selector">

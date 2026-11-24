@@ -44,18 +44,19 @@
   align-items: center;
   justify-content: center;
   box-shadow: none;
-  transition: background 0.18s ease, transform 0.18s var(--ease-spring), color 0.18s ease;
+  transition: background 0.14s ease, transform 0.14s var(--ease-out), color 0.14s ease;
 }
 
 .modal-outer-nav:hover {
   background: #e4e4e7;
   color: #18181b;
-  transform: translateY(-50%) scale(1.08);
+  transform: translateY(-50%);
   box-shadow: none;
 }
 
 .modal-outer-nav:active {
-  transform: translateY(-50%) scale(0.94);
+  transform: translateY(-50%) scale(0.96);
+  transition-duration: 0.08s;
 }
 
 .modal-outer-nav.prev {
@@ -143,11 +144,12 @@
 
 .modal-icon-btn:hover {
   background: #fafafa;
-  transform: scale(1.04);
+  transform: none;
 }
 
 .modal-icon-btn:active {
   transform: scale(0.96);
+  transition-duration: 0.08s;
 }
 
 .modal-segmented {
@@ -328,18 +330,19 @@
   justify-content: center;
   box-shadow: none;
   opacity: 0.9;
-  transition: opacity 0.18s ease, transform 0.18s var(--ease-spring), background 0.18s ease, color 0.18s ease;
+  transition: opacity 0.14s ease, transform 0.14s var(--ease-out), background 0.14s ease, color 0.14s ease;
 }
 
 .modal-stage-nav:hover {
   opacity: 1;
   background: #e4e4e7;
   color: #18181b;
-  transform: translateY(-50%) scale(1.08);
+  transform: translateY(-50%);
 }
 
 .modal-stage-nav:active {
-  transform: translateY(-50%) scale(0.94);
+  transform: translateY(-50%) scale(0.96);
+  transition-duration: 0.08s;
 }
 
 .modal-stage-nav.prev {
@@ -533,11 +536,12 @@
 .sidebar-icon-btn:hover {
   color: #18181b;
   background: #e4e4e7;
-  transform: scale(1.05);
+  transform: none;
 }
 
 .sidebar-icon-btn:active {
-  transform: scale(0.95);
+  transform: scale(0.96);
+  transition-duration: 0.08s;
 }
 
 .modal-sidebar-body {
@@ -813,7 +817,7 @@
   letter-spacing: -0.01em;
   background: #18181b;
   color: #ffffff;
-  transition: background 0.18s ease, transform 0.18s var(--ease-spring), color 0.18s ease;
+  transition: background 0.14s ease, transform 0.14s var(--ease-out), color 0.14s ease;
 }
 
 .sidebar-copy-btn:hover {
@@ -821,7 +825,8 @@
 }
 
 .sidebar-copy-btn:active {
-  transform: translateY(0);
+  transform: scale(0.96);
+  transition-duration: 0.08s;
 }
 
 .sidebar-copy-btn.is-copied {
@@ -844,7 +849,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.18s ease, transform 0.18s var(--ease-spring), color 0.18s ease;
+  transition: background 0.14s ease, transform 0.14s var(--ease-out), color 0.14s ease;
 }
 
 .sidebar-chip-btn:hover {
@@ -853,6 +858,7 @@
 
 .sidebar-chip-btn:active {
   transform: scale(0.96);
+  transition-duration: 0.08s;
 }
 
 .sidebar-chip-btn.is-copied {
@@ -902,7 +908,7 @@
   align-items: center;
   justify-content: center;
   letter-spacing: -0.01em;
-  transition: background 0.18s ease, transform 0.18s var(--ease-spring);
+  transition: background 0.14s ease, transform 0.14s var(--ease-out);
 }
 
 .sidebar-dl-btn.primary {
@@ -918,7 +924,8 @@
 }
 
 .sidebar-dl-btn.primary:active {
-  transform: translateY(0);
+  transform: scale(0.96);
+  transition-duration: 0.08s;
 }
 
 .sidebar-dl-btn.secondary {
@@ -935,6 +942,8 @@
 
 .sidebar-dl-btn.secondary:active {
   background: #d4d4d8;
+  transform: scale(0.96);
+  transition-duration: 0.08s;
 }
 
 html.dark .shape-modal-overlay {

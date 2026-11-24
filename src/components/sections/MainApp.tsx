@@ -130,17 +130,15 @@ export const MainApp: React.FC<MainAppProps> = ({ initialView = 'catalog' }) => 
             ariaLabel="Section view switcher"
           />
 
-          {view === 'catalog' && (
-            <FluidTabs
-              tabs={STYLE_TABS}
-              activeId={styleMode}
-              onChange={handleStyleChange}
-              className="style-toggle-pill"
-              sliderClassName="style-slider"
-              btnClassName="style-btn"
-              ariaLabel="Shape style mode switcher"
-            />
-          )}
+          <FluidTabs
+            tabs={STYLE_TABS}
+            activeId={styleMode}
+            onChange={handleStyleChange}
+            className="style-toggle-pill"
+            sliderClassName="style-slider"
+            btnClassName="style-btn"
+            ariaLabel="Shape style mode switcher"
+          />
         </div>
       </section>
 
@@ -150,7 +148,11 @@ export const MainApp: React.FC<MainAppProps> = ({ initialView = 'catalog' }) => 
         isVisible={view === 'catalog'}
       />
 
-      <RandomToolSection isVisible={view === 'random'} />
+      <RandomToolSection
+        isVisible={view === 'random'}
+        styleMode={styleMode}
+        onStyleChange={handleStyleChange}
+      />
 
       <ShapeModal
         isOpen={isModalOpen}
