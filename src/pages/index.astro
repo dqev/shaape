@@ -1,44 +1,18 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { demoShapes } from '../data/demoShapes';
 import '../styles/global.css';
 
 const title = "Shaape | Clean SVG Abstract Shapes & Vector Library";
 const description = "Discover 500+ free abstract SVG shapes and grainy vector assets. Generate random shapes or browse handcrafted collections for modern web interfaces.";
 const canonicalURL = "https://shaape.co";
-
-const demoShapes = [
-  { id: 1, src: '/demo/1.svg', name: 'Badge 8' },
-  { id: 2, src: '/demo/2.svg', name: 'Cross 9' },
-  { id: 3, src: '/demo/3.svg', name: 'Ellipse' },
-  { id: 4, src: '/demo/4.svg', name: 'Flower 8' },
-  { id: 5, src: '/demo/5.svg', name: 'Flower 14' },
-  { id: 6, src: '/demo/6.svg', name: 'Geometry' },
-  { id: 7, src: '/demo/7.svg', name: 'Geometry 26' },
-  { id: 8, src: '/demo/8.svg', name: 'Geometry 50' },
-  { id: 9, src: '/demo/9.svg', name: 'Misc 1' },
-  { id: 10, src: '/demo/10.svg', name: 'Misc' },
-  { id: 11, src: '/demo/11.svg', name: 'Star 46' },
-  { id: 12, src: '/demo/12.svg', name: 'Moon 1' },
-  { id: 13, src: '/demo/13.svg', name: 'Misc 2' },
-];
 ---
 
 <BaseLayout title={title} description={description} canonicalURL={canonicalURL}>
   <main class="home-viewport-canvas">
     <header class="home-shapes-row" aria-label="Featured abstract shapes">
       {demoShapes.map((shape) => (
-        <div class="showcase-shape">
-          <img
-            src={shape.src}
-            alt={shape.name}
-            width="120"
-            height="120"
-            loading="eager"
-            decoding="async"
-            draggable="false"
-            class="showcase-shape-img"
-          />
-        </div>
+        <div class="showcase-shape" aria-label={shape.name} role="img" set:html={shape.svg} />
       ))}
     </header>
 
@@ -194,7 +168,9 @@ const demoShapes = [
     padding: 0;
   }
 
-  .showcase-shape-img {
+  .showcase-shape-img,
+  .showcase-shape :global(svg),
+  .showcase-shape-svg {
     width: 100%;
     height: 100%;
     object-fit: contain;
