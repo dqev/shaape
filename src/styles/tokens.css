@@ -1,0 +1,70 @@
+@font-face {
+  font-family: 'Figtree';
+  src: url('/font/Figtree-VariableFont_wght.woff2') format('woff2'),
+       url('/font/Figtree-VariableFont_wght.ttf') format('truetype');
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Figtree';
+  src: url('/font/Figtree-Italic-VariableFont_wght.woff2') format('woff2'),
+       url('/font/Figtree-Italic-VariableFont_wght.ttf') format('truetype');
+  font-weight: 300 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root {
+  /* Colors */
+  --heading: #111111;
+  --body: #262626;
+  --body-muted: #5b5b5b;
+  --body-faint: #63636b;
+  --background: #ffffff;
+  --card-bg: #f4f4f5;
+  --card-hover-bg: #e8e8eb;
+  --border: rgba(0, 0, 0, 0.06);
+
+  /* Selections */
+  --selection-color: #111111;
+  --selection-bg: #efefef;
+
+  /* Typography */
+  --font-primary: 'Figtree', -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Motion & Easings */
+  --duration-smooth: .15s;
+  --ease-smooth: cubic-bezier(.19, 1, .22, 1);
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-liquid: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-modal: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Swatch Palettes */
+  --swatch-pink: #ff63a5;
+  --swatch-orange: #ff8438;
+  --swatch-yellow: #ffb800;
+  --swatch-green: #22c55e;
+  --swatch-blue: #3b82f6;
+  --swatch-purple: #8b5cf6;
+  --swatch-coral: #ff6b6b;
+  --swatch-navy: #1e293b;
+
+  --active-cat-color: #ffb800;
+}
+
+html.dark {
+  --heading: #f4f4f5;
+  --body: #e4e4e7;
+  --body-muted: #a1a1aa;
+  --body-faint: #71717a;
+  --background: #09090b;
+  --card-bg: #18181b;
+  --card-hover-bg: #27272a;
+  --border: rgba(255, 255, 255, 0.08);
+  --selection-color: #ffffff;
+  --selection-bg: #27272a;
+}

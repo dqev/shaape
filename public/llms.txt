@@ -1,0 +1,16 @@
+# Shaape (https://shaape.co)
+
+Shaape is a free web library of 500+ abstract vector shapes, cyber shapes, badge vectors, and procedural grainy noise gradients for modern UI and graphic design.
+Created by Dev Chauhan (https://x.com/devchauhann3).
+All shapes are 100% free for personal and commercial use without attribution.
+
+## Main Pages
+- Home & Showcase: https://shaape.co/
+- Full Catalog (500+ Shapes): https://shaape.co/shapes
+- Random Procedural Shape Generator: https://shaape.co/random
+
+## Features & Export Capabilities
+- Export formats: Raw SVG clipboard copy, scalable .svg file download, 4x high-resolution PNG raster download.
+- Visual styles: Smooth solid normal vector, multi-color gradient, and procedural feTurbulence grainy noise texture.
+- Procedural Generator: Real-time geometric topology synthesis across Stars, Flowers, and Geometry with interactive 3D physics tilt and color palette selection.
+- Tech Stack: Astro, React, TypeScript, Tailwind/Clean Modern CSS tokens.

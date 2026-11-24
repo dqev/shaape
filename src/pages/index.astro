@@ -1,0 +1,475 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/global.css';
+
+const title = "Shaape | Clean SVG Abstract Shapes & Vector Library";
+const description = "Discover 500+ free abstract SVG shapes and grainy vector assets. Generate random shapes or browse handcrafted collections for modern web interfaces.";
+const canonicalURL = "https://shaape.co";
+
+const demoShapes = [
+  { id: 1, src: '/demo/1.svg', name: 'Badge 8' },
+  { id: 2, src: '/demo/2.svg', name: 'Cross 9' },
+  { id: 3, src: '/demo/3.svg', name: 'Ellipse' },
+  { id: 4, src: '/demo/4.svg', name: 'Flower 8' },
+  { id: 5, src: '/demo/5.svg', name: 'Flower 14' },
+  { id: 6, src: '/demo/6.svg', name: 'Geometry' },
+  { id: 7, src: '/demo/7.svg', name: 'Geometry 26' },
+  { id: 8, src: '/demo/8.svg', name: 'Geometry 50' },
+  { id: 9, src: '/demo/9.svg', name: 'Misc 1' },
+  { id: 10, src: '/demo/10.svg', name: 'Misc' },
+  { id: 11, src: '/demo/11.svg', name: 'Star 46' },
+  { id: 12, src: '/demo/12.svg', name: 'Moon 1' },
+  { id: 13, src: '/demo/13.svg', name: 'Misc 2' },
+];
+---
+
+<BaseLayout title={title} description={description} canonicalURL={canonicalURL}>
+  <main class="home-viewport-canvas">
+    <header class="home-shapes-row" aria-label="Featured abstract shapes">
+      {demoShapes.map((shape) => (
+        <div class="showcase-shape">
+          <img
+            src={shape.src}
+            alt={shape.name}
+            width="120"
+            height="120"
+            loading="eager"
+            decoding="async"
+            draggable="false"
+            class="showcase-shape-img"
+          />
+        </div>
+      ))}
+    </header>
+
+    <footer class="home-bottom-content">
+      <div class="home-hero-lockup">
+        <h1 class="hero-brand-title">
+          <span class="hero-brand-emblem" aria-hidden="true">
+            <img
+              src="/logo.svg"
+              alt="Shaape Emblem"
+              width="36"
+              height="36"
+              draggable="false"
+              class="hero-emblem-img"
+            />
+          </span>
+          <span class="hero-brand-text">shaape.co</span>
+        </h1>
+        <p class="hero-brand-subtitle">
+          A collection of clean SVG abstract shapes and vector assets for web &amp; UI interfaces.
+        </p>
+
+        <div class="hero-buttons-row">
+          <a
+            href="/shapes"
+            class="rounded-btn rounded-btn-primary"
+            id="btnExploreShapes"
+            title="Browse all 500+ vector shapes"
+          >
+            Shapes
+          </a>
+
+          <a
+            href="/random"
+            class="rounded-btn rounded-btn-secondary"
+            id="btnRandomGenerator"
+            title="Open random shape generator"
+          >
+            Random
+          </a>
+
+          <a
+            href="https://github.com/dqev/shaape"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="rounded-btn rounded-btn-secondary btn-github-hero"
+            id="btnGithubRepo"
+            title="View dqev/shaape on GitHub"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              class="github-btn-icon"
+              aria-hidden="true"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+              />
+            </svg>
+            <span class="github-btn-text">GitHub</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="home-footer-credit">
+        <p class="footer-text">
+          Built by
+          <a
+            href="https://x.com/devchauhann3"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="footer-author-link"
+          >
+            <img
+              src="/pfp.svg"
+              alt="Dev Chauhan"
+              class="footer-pfp"
+              width="20"
+              height="20"
+              loading="lazy"
+              decoding="async"
+            />
+            <span>Dev Chauhan</span>
+          </a>
+        </p>
+      </div>
+    </footer>
+  </main>
+</BaseLayout>
+
+<style>
+  :global(body) {
+    overflow-x: hidden;
+    background: #ffffff;
+    margin: 0;
+    padding: 0;
+  }
+
+  :global(html.dark body) {
+    background: #09090b;
+  }
+
+  .home-viewport-canvas {
+    width: 100vw;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    background: transparent;
+    position: relative;
+    user-select: none;
+    -webkit-user-select: none;
+    overflow-x: hidden;
+  }
+
+  .home-shapes-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 0 !important;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box;
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .showcase-shape {
+    flex: 1 1 0;
+    min-width: 0;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: default !important;
+    pointer-events: none !important;
+    user-select: none !important;
+    -webkit-user-select: none !important;
+    -webkit-user-drag: none !important;
+    margin: 0;
+    padding: 0;
+  }
+
+  .showcase-shape-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    pointer-events: none !important;
+    user-select: none !important;
+    -webkit-user-select: none !important;
+    -webkit-user-drag: none !important;
+  }
+
+  .home-bottom-content {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-top: auto;
+    padding: clamp(24px, 4vw, 48px) clamp(24px, 4.5vw, 60px);
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    gap: 32px;
+  }
+
+  .home-hero-lockup {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    max-width: 560px;
+    width: 100%;
+  }
+
+  .home-footer-credit {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-shrink: 0;
+  }
+
+  .hero-brand-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: clamp(2.1rem, 3.4vw, 2.9rem);
+    font-weight: 600;
+    color: #18181b;
+    letter-spacing: -0.035em;
+    margin: 0;
+    line-height: 1.12;
+  }
+
+  :global(html.dark) .hero-brand-title {
+    color: #f4f4f5;
+  }
+
+  .hero-brand-emblem {
+    width: clamp(34px, 2.8vw, 44px);
+    height: clamp(34px, 2.8vw, 44px);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .hero-emblem-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.08));
+    pointer-events: none !important;
+    user-select: none !important;
+    -webkit-user-drag: none !important;
+  }
+
+  .hero-brand-text {
+    display: inline-block;
+  }
+
+  .hero-brand-subtitle {
+    font-size: clamp(0.96rem, 1.2vw, 1.08rem);
+    color: #52525b;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+    margin: 12px 0 22px 0;
+    max-width: 440px;
+  }
+
+  :global(html.dark) .hero-brand-subtitle {
+    color: #a1a1aa;
+  }
+
+  .hero-buttons-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .rounded-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    height: 42px;
+    min-width: 120px;
+    padding: 0 24px;
+    border-radius: 9999px;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: inherit;
+    text-decoration: none;
+    border: none;
+    box-shadow: none;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+      background-color 0.18s ease,
+      opacity 0.18s ease;
+    will-change: transform;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .rounded-btn:hover {
+    transform: translateY(-2px) scale(1.02);
+  }
+
+  .rounded-btn:active {
+    transform: translateY(0) scale(0.97);
+  }
+
+  .rounded-btn-primary {
+    background: #18181b;
+    color: #ffffff;
+  }
+
+  .rounded-btn-primary:hover {
+    background: #27272a;
+  }
+
+  :global(html.dark) .rounded-btn-primary {
+    background: #f4f4f5;
+    color: #18181b;
+  }
+
+  :global(html.dark) .rounded-btn-primary:hover {
+    background: #ffffff;
+  }
+
+  .rounded-btn-secondary {
+    background: #f4f4f5;
+    color: #18181b;
+  }
+
+  .rounded-btn-secondary:hover {
+    background: #e4e4e7;
+  }
+
+  .btn-github-hero {
+    gap: 10px;
+    padding: 0 22px;
+  }
+
+  .github-btn-icon {
+    width: 17px;
+    height: 17px;
+    display: block;
+    flex-shrink: 0;
+  }
+
+  .github-btn-text {
+    line-height: 1;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  :global(html.dark) .rounded-btn-secondary {
+    background: #18181b;
+    color: #f4f4f5;
+  }
+
+  :global(html.dark) .rounded-btn-secondary:hover {
+    background: #27272a;
+  }
+
+  @media (max-width: 900px) {
+    .home-shapes-row {
+      overflow-x: auto;
+      justify-content: flex-start;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .home-shapes-row::-webkit-scrollbar {
+      display: none;
+    }
+
+    .showcase-shape {
+      flex: 0 0 20% !important;
+      width: 20% !important;
+      min-width: 20% !important;
+      max-width: 20% !important;
+      aspect-ratio: 1 / 1;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .home-viewport-canvas {
+      padding: 0;
+    }
+
+    .home-bottom-content {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 24px 20px 32px 20px;
+      gap: 22px;
+    }
+
+    .home-footer-credit {
+      justify-content: flex-start;
+      margin-top: 4px;
+    }
+
+    .hero-brand-title {
+      font-size: 1.85rem;
+      gap: 10px;
+    }
+
+    .hero-brand-emblem {
+      width: 32px;
+      height: 32px;
+    }
+
+    .hero-brand-subtitle {
+      font-size: 0.9rem;
+      margin: 10px 0 18px 0;
+    }
+
+    .hero-buttons-row {
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .rounded-btn {
+      flex: 1 1 0;
+      min-width: 0;
+      padding: 0 10px;
+      height: 42px;
+      font-size: 13px;
+    }
+
+    .btn-github-hero {
+      gap: 7px;
+      padding: 0 10px;
+    }
+
+    .github-btn-icon {
+      width: 15px;
+      height: 15px;
+    }
+
+    .github-btn-text {
+      font-size: 13px;
+    }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    window.addEventListener('dragstart', (e) => {
+      if (e.target && (e.target.tagName === 'IMG' || e.target.tagName === 'svg')) {
+        e.preventDefault();
+      }
+    });
+  })();
+</script>

@@ -1,0 +1,186 @@
+---
+export interface Props {
+  title?: string;
+  description?: string;
+  canonicalURL?: string;
+  image?: string;
+  keywords?: string;
+  jsonLd?: Record<string, any>;
+}
+
+const {
+  title = "Shaape | Abstract SVG & Grainy Vector Shapes (500+)",
+  description = "Download 500+ free abstract SVG shapes and grainy gradient vector assets. Cyber, badges, geometry, and noise styles with 1-click SVG copy and 4x PNG export.",
+  canonicalURL = "https://shaape.co",
+  image = "https://shaape.co/og.png",
+  keywords = "shaape, shaape.co, grainy shapes, abstract svg shapes, vector shapes, cyber shapes, badge vectors, grainy gradient shapes, noise gradient shapes, retro abstract vectors, free svg assets, ui design shapes, y2k aesthetic vectors, modern graphic design assets, svg noise filter, commercial use svgs, abstract vector graphics, transparent svg blobs",
+  jsonLd
+} = Astro.props;
+
+const defaultJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://shaape.co/#website",
+      "url": "https://shaape.co",
+      "name": "Shaape",
+      "description": "Free library of 500+ abstract SVG shapes and grainy gradient vector assets for UI, web, and graphic design.",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "WebApplication",
+      "@id": "https://shaape.co/#app",
+      "name": "Shaape",
+      "url": "https://shaape.co",
+      "applicationCategory": "DesignApplication",
+      "operatingSystem": "All",
+      "browserRequirements": "Requires JavaScript and HTML5 Canvas support",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "description": "Web tool providing 500+ customizable abstract SVG shapes and grainy noise gradient vector assets with instant SVG code copy and 4x PNG export.",
+      "featureList": [
+        "500+ handcrafted vector abstract shapes across 13 categories",
+        "Dual aesthetic rendering: Normal smooth vector and Grainy noise texture",
+        "One-click SVG code copy to clipboard",
+        "Pure SVG vector file download",
+        "4x high-resolution raster PNG export",
+        "Zero-dependency procedural SVG noise filtering using feTurbulence",
+        "Free for personal and commercial projects without attribution"
+      ],
+      "creator": {
+        "@type": "Person",
+        "name": "Dev Chauhan"
+      }
+    },
+    {
+      "@type": "ImageGallery",
+      "@id": "https://shaape.co/#gallery",
+      "name": "Abstract Shapes and Grainy Vector Gallery",
+      "url": "https://shaape.co",
+      "description": "Curated collection of 500+ abstract geometric vector shapes in normal and grainy gradient styles."
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://shaape.co/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is Shaape?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Shaape is a free web library of 500+ abstract SVG shapes and grainy gradient vector assets in normal solid, multi-color gradient, and procedural noise styles for web, UI, and graphic design."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are Shaape vector shapes free for commercial use?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. All 500+ shapes are 100% free for both personal and commercial projects, client work, web applications, marketing materials, and digital interfaces with no attribution required."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What categories of shapes are available in Shaape?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The collection includes 500+ shapes across diverse categories including Badges, Arrows, Cyber, Fauna, Flowers, Stars, Geometry, and Abstract vector seals."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does the grainy texture in the shapes work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Grainy shapes use native procedural SVG filters (feTurbulence, feComposite, and feBlend) rather than heavy external image textures. This produces an authentic noise texture that is lightweight and infinitely scalable."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What formats can I export shapes in?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You can copy raw inline SVG directly to your clipboard, download pure scalable .svg files, or export crisp high-resolution 4x .png images."
+          }
+        }
+      ]
+    }
+  ]
+};
+
+const finalJsonLd = jsonLd || defaultJsonLd;
+---
+
+<!doctype html>
+<html lang="en" class="light" prefix="og: https://ogp.me/ns#">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script is:inline>document.documentElement.className = "light";</script>
+
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content="Dev Chauhan" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <link rel="canonical" href={canonicalURL} />
+
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="color-scheme" content="light" />
+    <meta name="application-name" content="Shaape" />
+    <meta name="apple-mobile-web-app-title" content="Shaape" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="rating" content="general" />
+    <meta name="distribution" content="global" />
+    <link rel="alternate" type="text/plain" href="https://shaape.co/llms.txt" title="LLM Context" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content="Shaape" />
+    <meta property="og:image" content={image} />
+    <meta property="og:image:width" content="800" />
+    <meta property="og:image:height" content="400" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+
+    <!-- Favicon & Icons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Preload variable font -->
+    <link rel="preload" href="/font/Figtree-VariableFont_wght.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+
+    <!-- Sitemap -->
+    <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify(finalJsonLd)} />
+
+    <slot name="head" />
+  </head>
+  <body>
+    <slot />
+    <div class="toast-notification" id="toastNotification" aria-live="polite"></div>
+    <script src="../scripts/squircle.ts"></script>
+  </body>
+</html>
