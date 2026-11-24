@@ -70,7 +70,7 @@ export async function syncShapes(): Promise<void> {
   if (fs.existsSync(targetFile)) {
     try {
       const module = await import(targetFile);
-      existingShapes = (module.SHAAPES_DATA || module.COOLSHAPES_DATA || []) as ShapeItem[];
+      existingShapes = (module.RAW_SHAAPES || module.SHAAPES_DATA || module.COOLSHAPES_DATA || []) as ShapeItem[];
     } catch {
       existingShapes = [];
     }
@@ -185,7 +185,21 @@ export async function syncShapes(): Promise<void> {
   d?: string;
 }
 
-export const SHAAPES_DATA: ShapeItem[] = ${JSON.stringify(resultShapes, null, 2)};
+function shuffleShapes(arr: ShapeItem[], seed = 777): ShapeItem[] {
+  const result = [...arr];
+  let s = seed;
+  for (let i = result.length - 1; i > 0; i--) {
+    s = (s * 1664525 + 1013904223) % 4294967296;
+    const rnd = (s >>> 0) / 4294967296;
+    const j = Math.floor(rnd * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
+}
+
+const RAW_SHAAPES: ShapeItem[] = ${JSON.stringify(resultShapes, null, 2)};
+
+export const SHAAPES_DATA: ShapeItem[] = shuffleShapes(RAW_SHAAPES);
 `;
 
   fs.writeFileSync(targetFile, outputCode, 'utf8');

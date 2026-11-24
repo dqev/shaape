@@ -2,13 +2,13 @@
   <img src="public/logo.svg" width="96" alt="Shaape Logo" />
 </p>
 
-A collection of 500+ free vector assets and grainy gradient graphics for modern web interfaces.
+A collection of 440+ free vector assets and grainy gradient graphics for modern web interfaces.
 
 [Live Site](https://shaape.co)
 
 ## Overview
 
-Shaape provides 500+ vector assets across diverse categories: Arrows, Badges, Cyber, Fauna, Flowers, Stars, Geometry, and Abstract seals. Every asset comes in multiple visual styles:
+Shaape provides 440+ vector assets across diverse categories: Arrows, Badges, Cyber, Flowers, Stars, Geometry, and Abstract seals. Every asset comes in multiple visual styles:
 
 - **Normal**: Smooth solid vectors with clean edges
 - **Gradient**: Vibrant multi-color gradient fills
