@@ -6,7 +6,7 @@ const CHUNK_SIZE = 48;
 
 export interface CatalogGridProps {
   styleMode: string;
-  onOpenModal: (shape: ShapeItem) => void;
+  onOpenModal: (shape: ShapeItem, triggerElement?: HTMLElement) => void;
   isVisible: boolean;
 }
 

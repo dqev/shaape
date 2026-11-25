@@ -5,7 +5,7 @@ import SquircleCard from '../ui/SquircleCard';
 export interface CatalogCardProps {
   shape: ShapeItem;
   styleMode: string;
-  onOpenModal: (shape: ShapeItem) => void;
+  onOpenModal: (shape: ShapeItem, triggerElement?: HTMLElement) => void;
 }
 
 export const CatalogCard: React.FC<CatalogCardProps> = ({
@@ -29,7 +29,7 @@ export const CatalogCard: React.FC<CatalogCardProps> = ({
       className="brand-card"
       data-shape-id={shape.id}
       title="Customize shape"
-      onClick={() => onOpenModal(shape)}
+      onClick={(e) => onOpenModal(shape, e.currentTarget)}
     >
       <div className="brand-preview">
         <div

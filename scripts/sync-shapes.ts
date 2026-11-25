@@ -70,7 +70,7 @@ export async function syncShapes(): Promise<void> {
   if (fs.existsSync(targetFile)) {
     try {
       const module = await import(targetFile);
-      existingShapes = (module.RAW_SHAAPES || module.SHAAPES_DATA || module.COOLSHAPES_DATA || []) as ShapeItem[];
+      existingShapes = (module.RAW_SHAAPES || module.SHAAPES_DATA || []) as ShapeItem[];
     } catch {
       existingShapes = [];
     }

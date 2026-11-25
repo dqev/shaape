@@ -4,11 +4,12 @@ import { demoShapes } from '../data/demoShapes';
 import '../styles/global.css';
 
 const title = "Shaape | Clean SVG Abstract Shapes & Vector Library";
-const description = "Discover 440+ free abstract SVG shapes and grainy vector assets. Generate random shapes or browse handcrafted collections for modern web interfaces.";
+const description = "Discover 530+ free abstract SVG shapes and grainy vector assets. Generate random shapes or browse handcrafted collections for modern web interfaces.";
 const canonicalURL = "https://shaape.co";
+const image = "https://shaape.co/og.png";
 ---
 
-<BaseLayout title={title} description={description} canonicalURL={canonicalURL}>
+<BaseLayout title={title} description={description} canonicalURL={canonicalURL} image={image}>
   <main class="home-viewport-canvas">
     <header class="home-shapes-row" aria-label="Featured abstract shapes">
       {demoShapes.map((shape) => (
@@ -40,7 +41,7 @@ const canonicalURL = "https://shaape.co";
             href="/shapes"
             class="rounded-btn rounded-btn-primary"
             id="btnExploreShapes"
-            title="Browse all 440+ vector shapes"
+            title="Browse all 530+ vector shapes"
           >
             Shapes
           </a>
@@ -58,7 +59,7 @@ const canonicalURL = "https://shaape.co";
 
       <div class="home-footer-credit">
         <p class="home-footer-text">
-          Built by <a
+          <span class="home-footer-line">Built by <a
             href="https://x.com/devchauhann3"
             target="_blank"
             rel="noopener noreferrer"
@@ -71,12 +72,13 @@ const canonicalURL = "https://shaape.co";
               height="18"
               loading="lazy"
               decoding="async"
-            /><span>Dev Chauhan.</span></a> The source code is available on <a
+            /><span>Dev Chauhan.</span></a></span>
+          <span class="home-footer-line">The source code is available on <a
             href="https://github.com/dqev/shaape"
             target="_blank"
             rel="noopener noreferrer"
             class="home-footer-link"
-          >GitHub.</a>
+          >GitHub.</a></span>
         </p>
       </div>
     </footer>
@@ -184,10 +186,14 @@ const canonicalURL = "https://shaape.co";
     flex-shrink: 0;
   }
 
+  .home-footer-line {
+    display: inline;
+  }
+
   .home-footer-text {
     font-size: 13.5px;
     color: #71717a;
-    font-family: inherit;
+    font-family: var(--font-primary);
     font-weight: 400;
     letter-spacing: -0.01em;
     margin: 0;
@@ -303,8 +309,8 @@ const canonicalURL = "https://shaape.co";
     padding: 0 24px;
     border-radius: 9999px;
     font-size: 14px;
-    font-weight: 500;
-    font-family: inherit;
+    font-weight: 400;
+    font-family: var(--font-primary);
     text-decoration: none;
     border: none;
     box-shadow: none;
@@ -329,6 +335,7 @@ const canonicalURL = "https://shaape.co";
   .rounded-btn-primary {
     background: #18181b;
     color: #ffffff;
+    font-weight: 600;
   }
 
   .rounded-btn-primary:hover {
@@ -398,6 +405,14 @@ const canonicalURL = "https://shaape.co";
     .home-footer-credit {
       justify-content: flex-start;
       margin-top: 4px;
+    }
+
+    .home-footer-line {
+      display: block;
+    }
+
+    .home-footer-line + .home-footer-line {
+      margin-top: 3px;
     }
 
     .hero-brand-title {

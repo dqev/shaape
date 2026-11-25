@@ -10,11 +10,9 @@
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: opacity 0.3s var(--ease-modal), visibility 0.3s ease;
 }
 
 .shape-modal-overlay.is-open {
-  opacity: 1;
   visibility: visible;
   pointer-events: auto;
 }
@@ -44,7 +42,12 @@
   align-items: center;
   justify-content: center;
   box-shadow: none;
-  transition: background 0.14s ease, transform 0.14s var(--ease-out), color 0.14s ease;
+  opacity: 0;
+  transition: opacity 0.24s var(--ease-out), background 0.14s ease, transform 0.14s var(--ease-out), color 0.14s ease;
+}
+
+.shape-modal-overlay.is-open .modal-outer-nav {
+  opacity: 1;
 }
 
 .modal-outer-nav:hover {
@@ -192,8 +195,9 @@
   padding: 0 16px;
   height: 32px;
   border-radius: 9999px;
+  font-family: var(--font-primary) !important;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 400;
   color: #71717a;
   cursor: pointer;
   transition: color 0.2s ease;
@@ -211,6 +215,7 @@
 .modal-seg-btn.active {
   color: #18181b;
   font-weight: 600;
+  font-family: var(--font-primary) !important;
 }
 
 .modal-copy-code-btn {
@@ -224,8 +229,9 @@
   padding: 0 16px;
   height: 38px;
   border-radius: 9999px;
+  font-family: var(--font-primary) !important;
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 1;
   box-sizing: border-box;
   flex-shrink: 0;
@@ -292,6 +298,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  filter: blur(0px);
+  opacity: 1;
+  transform: scale(1);
+  transition: filter 0.26s var(--ease-modal),
+    opacity 0.22s var(--ease-modal),
+    transform 0.26s var(--ease-modal);
+  will-change: filter, opacity, transform;
+}
+
+.modal-svg-wrap.is-shape-changing {
+  filter: blur(14px);
+  opacity: 0.25;
+  transform: scale(0.94);
+  transition: none !important;
 }
 
 .modal-svg-wrap svg {
@@ -369,9 +389,9 @@
 .modal-shortcut-hint kbd {
   display: inline-block;
   padding: 1px 5px;
-  font-family: inherit;
+  font-family: var(--font-primary) !important;
   font-size: 10px;
-  font-weight: 500;
+  font-weight: 400;
   border-radius: 4px;
   background: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.08);
@@ -441,9 +461,9 @@
   background: transparent !important;
   box-shadow: none !important;
   color: #71717a;
-  font-family: inherit;
+  font-family: var(--font-primary) !important;
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 400;
   padding: 0 14px;
   height: 26px;
   border-radius: 9999px;
@@ -464,6 +484,7 @@
 .code-format-tab-btn.active {
   color: #18181b;
   font-weight: 600;
+  font-family: var(--font-primary) !important;
   background: transparent !important;
   box-shadow: none !important;
 }
@@ -477,8 +498,9 @@
 .modal-code-pre {
   margin: 0 !important;
   padding: 0 !important;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+  font-family: var(--font-primary) !important;
   font-size: 12px !important;
+  font-weight: 400 !important;
   line-height: 1.6 !important;
   color: #27272a !important;
   white-space: pre !important;
@@ -487,7 +509,8 @@
 
 .modal-code-pre code {
   display: block !important;
-  font-family: inherit !important;
+  font-family: var(--font-primary) !important;
+  font-weight: 400 !important;
   color: inherit !important;
   white-space: pre !important;
 }
@@ -592,7 +615,7 @@
   box-shadow: none !important;
   border-radius: 9px;
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 400;
   color: #71717a;
   cursor: pointer;
   transition: color 0.2s ease;
@@ -600,7 +623,7 @@
   align-items: center;
   justify-content: center;
   padding: 0;
-  font-family: inherit;
+  font-family: var(--font-primary) !important;
   user-select: none;
 }
 
@@ -611,6 +634,7 @@
 .sidebar-style-btn.active {
   color: #18181b;
   font-weight: 600;
+  font-family: var(--font-primary) !important;
 }
 
 .sidebar-capsule-row {
@@ -627,7 +651,7 @@
 
 .capsule-label {
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 400;
   color: #71717a;
   min-width: 46px;
 }
@@ -806,7 +830,7 @@
   height: 42px;
   border-radius: 9999px;
   border: none;
-  font-family: inherit;
+  font-family: var(--font-primary) !important;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -842,7 +866,7 @@
   border: none;
   background: #f4f4f5;
   color: #18181b;
-  font-family: inherit;
+  font-family: var(--font-primary) !important;
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
@@ -902,7 +926,7 @@
 .sidebar-dl-btn {
   border-radius: 9999px;
   border: none;
-  font-family: inherit;
+  font-family: var(--font-primary) !important;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -933,7 +957,7 @@
   background: #f4f4f5;
   color: #18181b;
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .sidebar-dl-btn.secondary:hover {
@@ -985,6 +1009,8 @@ html.dark .modal-seg-btn:hover {
 
 html.dark .modal-seg-btn.active {
   color: #ffffff;
+  font-weight: 600;
+  font-family: var(--font-primary) !important;
 }
 
 html.dark .modal-copy-code-btn {
@@ -1026,11 +1052,15 @@ html.dark .code-format-tab-btn:hover {
 html.dark .code-format-tab-btn.active {
   background: transparent !important;
   color: #ffffff;
+  font-weight: 600;
+  font-family: var(--font-primary) !important;
   box-shadow: none !important;
 }
 
 html.dark .modal-code-pre {
   color: #e4e4e7 !important;
+  font-family: var(--font-primary) !important;
+  font-weight: 400 !important;
 }
 
 html.dark .sidebar-copy-btn {
@@ -1272,8 +1302,9 @@ html.dark .modal-outer-nav:hover {
     transform: none !important;
     height: 38px !important;
     padding: 0 16px !important;
+    font-family: var(--font-primary) !important;
     font-size: 13px !important;
-    font-weight: 500 !important;
+    font-weight: 400 !important;
   }
 
   .shape-modal-stage {

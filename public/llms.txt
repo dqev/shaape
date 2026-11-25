@@ -1,16 +1,41 @@
 # Shaape (https://shaape.co)
 
-Shaape is a free web library of 500+ abstract vector shapes, cyber shapes, badge vectors, and procedural grainy noise gradients for modern UI and graphic design.
+Shaape is a free, open-source web library of 530+ abstract vector shapes, cyber shapes, badge vectors, and procedural grainy noise gradients for modern UI, landing pages, and graphic design.
 Created by Dev Chauhan (https://x.com/devchauhann3).
-All shapes are 100% free for personal and commercial use without attribution.
+All shapes are 100% free for personal and commercial projects without attribution.
 
 ## Main Pages
 - Home & Showcase: https://shaape.co/
-- Full Catalog (500+ Shapes): https://shaape.co/shapes
+- Full Catalog (530+ Shapes): https://shaape.co/shapes
 - Random Procedural Shape Generator: https://shaape.co/random
+- Design Blog & Vector Guide: https://shaape.co/blog
+- Where to Download Free Abstract SVG Shapes (2025 Guide): https://shaape.co/blog/where-to-download-free-abstract-svg-shapes
+
+## Categories Available (530+ Unique Vectors)
+- Geometry (117 shapes): Bauhaus symbols, geometric glyphs, modular shapes, cutouts, emblems
+- Stars (42 shapes): Starbursts, sparks, compass stars, 4-point, 8-point, and multi-ray stars
+- Flowers (40 shapes): Petal rosettes, blossoms, clovers, organic bloom cutouts
+- Cyber (34 shapes): Y2K vectors, futuristic runes, techno emblems, turbine pinwheels
+- Wireframe (31 shapes): 3D wireframe geometries, perspective meshes, spatial grids
+- Badges (33 shapes): Medallions, seals, perforated emblems, arc motifs, reward crests
+- Moon (23 shapes): Crescents, intersecting moon phases, lunar glyphs
+- Prism (48 shapes): Isometric prisms, folded polygons, faceted crystals
+- Cross (10 shapes): Plus emblems, optical crosses, medical and graphic badges
+- Wheel (14 shapes): Segmented radial discs, gear wheels, spoke rotors
+- Triangle (27 shapes): Delta icons, stepped pyramids, interlocking triangles
+- Ellipse & Rectangle (47 shapes): Capsules, squircles, pill badges, fluid ovals
+- Number & Misc (45 shapes): Numeric emblems, abstract silhouettes, fluid shapes
 
 ## Features & Export Capabilities
-- Export formats: Raw SVG clipboard copy, scalable .svg file download, 4x high-resolution PNG raster download.
-- Visual styles: Smooth solid normal vector, multi-color gradient, and procedural feTurbulence grainy noise texture.
+- Export formats: 1-click inline SVG clipboard copy, scalable pure .svg file download, 4x ultra-high-resolution PNG raster download.
+- Visual styles:
+  1. Normal: Clean, smooth solid vector paths with minimal anchor points.
+  2. Gradient: Vibrant multi-stop gradient colorways.
+  3. Grainy: Textured noise gradients created natively with procedural SVG filters (`feTurbulence`, `feComposite`, `feBlend`) with zero external image dependencies.
 - Procedural Generator: Real-time geometric topology synthesis across Stars, Flowers, and Geometry with interactive 3D physics tilt and color palette selection.
-- Tech Stack: Astro, React, TypeScript, Tailwind/Clean Modern CSS tokens.
+- Tech Stack: Astro 5, React 19, TypeScript, native CSS design tokens (Figtree font).
+
+## License & Usage Rights
+- Free for commercial and personal use (MIT-friendly / public domain design assets).
+- No attribution or backlink required.
+- Ideal for landing pages, SaaS websites, design systems, poster design, and UI prototypes.

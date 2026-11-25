@@ -1,0 +1,177 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Container from '../../components/layout/Container.astro';
+import { BLOG_POSTS } from '../../data/blogPosts';
+import '../../styles/global.css';
+
+const title = "Blog | Shaape - Abstract SVG & Design Guides";
+const description = "Guides and technical writeups on abstract SVG shapes, procedural grainy gradients, and modern vector aesthetics.";
+const canonicalURL = "https://shaape.co/blog";
+const image = "https://shaape.co/og.png";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "@id": "https://shaape.co/blog#blog",
+  "name": "Shaape Blog",
+  "url": canonicalURL,
+  "description": description,
+  "publisher": {
+    "@type": "Organization",
+    "name": "Shaape",
+    "url": "https://shaape.co"
+  }
+};
+---
+
+<BaseLayout title={title} description={description} canonicalURL={canonicalURL} image={image} jsonLd={jsonLd}>
+  <Header />
+
+  <Container class="blog-index-container">
+    <header class="blog-index-header">
+      <h1 class="blog-index-title">Blog</h1>
+      <p class="blog-index-desc">
+        Thoughts and practical guides on abstract vector design, SVG noise filters, and modern interface aesthetics.
+      </p>
+    </header>
+
+    <div class="blog-posts-list">
+      {BLOG_POSTS.map((post) => (
+        <article
+          class="blog-post-card"
+          data-squircle-radius="22"
+          data-squircle-smoothing="60"
+        >
+          <a href={`/blog/${post.slug}`} class="blog-post-link">
+            <div class="blog-post-meta">
+              <time class="blog-post-date">{post.date}</time>
+              <span class="meta-separator">·</span>
+              <span class="blog-post-readtime">{post.readTime}</span>
+            </div>
+            <h2 class="blog-post-title">{post.title}</h2>
+            <p class="blog-post-excerpt">{post.description}</p>
+          </a>
+        </article>
+      ))}
+    </div>
+  </Container>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .blog-index-container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 7rem 1.5rem 5rem;
+  }
+
+  .blog-index-header {
+    margin-bottom: 2.25rem;
+  }
+
+  .blog-index-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--heading);
+    letter-spacing: -0.025em;
+    margin: 0 0 6px;
+    line-height: 1.25;
+  }
+
+  .blog-index-desc {
+    font-size: 14.5px;
+    color: var(--body-muted);
+    font-weight: 400;
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  .blog-posts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    border: none !important;
+  }
+
+  /* Squircle card matching Shaape card color, borderless */
+  .blog-post-card {
+    background-color: var(--card-bg);
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    border-radius: 22px;
+    transition: background-color var(--duration-smooth) var(--ease-smooth);
+  }
+
+  .blog-post-card:hover {
+    background-color: var(--card-hover-bg);
+  }
+
+  .blog-post-link {
+    display: block;
+    padding: 1.5rem 1.65rem;
+    text-decoration: none;
+  }
+
+  .blog-post-link:hover .blog-post-title {
+    color: #ff8438;
+  }
+
+  .blog-post-meta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--body-faint);
+    font-weight: 400;
+    margin-bottom: 8px;
+  }
+
+  .meta-separator {
+    color: var(--body-faint);
+    opacity: 0.5;
+  }
+
+  .blog-post-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--heading);
+    letter-spacing: -0.015em;
+    line-height: 1.35;
+    margin: 0 0 8px;
+    transition: color var(--duration-smooth) var(--ease-smooth);
+  }
+
+  .blog-post-excerpt {
+    font-size: 13.5px;
+    font-weight: 400;
+    color: var(--body-muted);
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  @media (max-width: 640px) {
+    .blog-index-container {
+      padding: 5.5rem 1.25rem 3.5rem;
+    }
+
+    .blog-index-title {
+      font-size: 21px;
+    }
+
+    .blog-post-card {
+      border-radius: 18px;
+    }
+
+    .blog-post-link {
+      padding: 1.25rem 1.25rem;
+    }
+
+    .blog-post-title {
+      font-size: 16px;
+    }
+  }
+</style>

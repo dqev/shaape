@@ -26,6 +26,7 @@ export const MainApp: React.FC<MainAppProps> = ({ initialView = 'catalog' }) => 
   const [view, setView] = useState<'catalog' | 'random'>(initialView);
   const [styleMode, setStyleMode] = useState<string>('gradient');
   const [modalShape, setModalShape] = useState<ShapeItem | null>(null);
+  const [modalTriggerEl, setModalTriggerEl] = useState<HTMLElement | null>(null);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   useEffect(() => {
@@ -91,13 +92,15 @@ export const MainApp: React.FC<MainAppProps> = ({ initialView = 'catalog' }) => 
     } catch (e) {}
   };
 
-  const handleOpenModal = (shape: ShapeItem) => {
+  const handleOpenModal = (shape: ShapeItem, element?: HTMLElement) => {
+    setModalTriggerEl(element || null);
     setModalShape(shape);
     setIsModalOpen(true);
   };
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
+    setModalTriggerEl(null);
   };
 
   const handlePrevShape = () => {
@@ -157,6 +160,7 @@ export const MainApp: React.FC<MainAppProps> = ({ initialView = 'catalog' }) => 
       <ShapeModal
         isOpen={isModalOpen}
         shape={modalShape}
+        triggerElement={modalTriggerEl}
         initialMode={styleMode}
         onClose={handleCloseModal}
         onPrev={handlePrevShape}

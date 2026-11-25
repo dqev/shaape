@@ -9,8 +9,8 @@ export interface Props {
 }
 
 const {
-  title = "Shaape | Abstract SVG & Grainy Vector Shapes (440+)",
-  description = "Download 440+ free abstract SVG shapes and grainy gradient vector assets. Cyber, badges, geometry, and noise styles with 1-click SVG copy and 4x PNG export.",
+  title = "Shaape | Abstract SVG & Grainy Vector Shapes (530+)",
+  description = "Download 530+ free abstract SVG shapes and grainy gradient vector assets. Cyber, badges, geometry, and noise styles with 1-click SVG copy and 4x PNG export.",
   canonicalURL = "https://shaape.co",
   image = "https://shaape.co/og.png",
   keywords = "shaape, shaape.co, grainy shapes, abstract svg shapes, vector shapes, cyber shapes, badge vectors, grainy gradient shapes, noise gradient shapes, retro abstract vectors, free svg assets, ui design shapes, y2k aesthetic vectors, modern graphic design assets, svg noise filter, commercial use svgs, abstract vector graphics, transparent svg blobs",
@@ -25,7 +25,7 @@ const defaultJsonLd = {
       "@id": "https://shaape.co/#website",
       "url": "https://shaape.co",
       "name": "Shaape",
-      "description": "Free library of 440+ abstract SVG shapes and grainy gradient vector assets for UI, web, and graphic design.",
+      "description": "Free library of 530+ abstract SVG shapes and grainy gradient vector assets for UI, web, and graphic design.",
       "inLanguage": "en"
     },
     {
@@ -41,9 +41,9 @@ const defaultJsonLd = {
         "price": "0",
         "priceCurrency": "USD"
       },
-      "description": "Web tool providing 440+ customizable abstract SVG shapes and grainy noise gradient vector assets with instant SVG code copy and 4x PNG export.",
+      "description": "Web tool providing 530+ customizable abstract SVG shapes and grainy noise gradient vector assets with instant SVG code copy and 4x PNG export.",
       "featureList": [
-        "440+ handcrafted vector abstract shapes across diverse categories",
+        "530+ handcrafted vector abstract shapes across diverse categories",
         "Dual aesthetic rendering: Normal smooth vector and Grainy noise texture",
         "One-click SVG code copy to clipboard",
         "Pure SVG vector file download",
@@ -61,7 +61,7 @@ const defaultJsonLd = {
       "@id": "https://shaape.co/#gallery",
       "name": "Abstract Shapes and Grainy Vector Gallery",
       "url": "https://shaape.co",
-      "description": "Curated collection of 440+ abstract geometric vector shapes in normal and grainy gradient styles."
+      "description": "Curated collection of 530+ abstract geometric vector shapes in normal and grainy gradient styles."
     },
     {
       "@type": "FAQPage",
@@ -72,7 +72,7 @@ const defaultJsonLd = {
           "name": "What is Shaape?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Shaape is a free web library of 440+ abstract SVG shapes and grainy gradient vector assets in normal solid, multi-color gradient, and procedural noise styles for web, UI, and graphic design."
+            "text": "Shaape is a free web library of 530+ abstract SVG shapes and grainy gradient vector assets in normal solid, multi-color gradient, and procedural noise styles for web, UI, and graphic design."
           }
         },
         {
@@ -80,7 +80,7 @@ const defaultJsonLd = {
           "name": "Are Shaape vector shapes free for commercial use?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. All 440+ shapes are 100% free for both personal and commercial projects, client work, web applications, marketing materials, and digital interfaces with no attribution required."
+            "text": "Yes. All 530+ shapes are 100% free for both personal and commercial projects, client work, web applications, marketing materials, and digital interfaces with no attribution required."
           }
         },
         {
@@ -88,7 +88,7 @@ const defaultJsonLd = {
           "name": "What categories of shapes are available in Shaape?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "The collection includes 440+ shapes across diverse categories including Badges, Arrows, Cyber, Flowers, Stars, Geometry, and Abstract vector seals."
+            "text": "The collection includes 530+ shapes across diverse categories including Badges, Arrows, Cyber, Flowers, Stars, Geometry, and Abstract vector seals."
           }
         },
         {
@@ -148,8 +148,11 @@ const finalJsonLd = jsonLd || defaultJsonLd;
     <meta property="og:description" content={description} />
     <meta property="og:site_name" content="Shaape" />
     <meta property="og:image" content={image} />
-    <meta property="og:image:width" content="800" />
-    <meta property="og:image:height" content="400" />
+    <meta property="og:image:secure_url" content={image} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="2400" />
+    <meta property="og:image:height" content="1260" />
+    <meta property="og:image:alt" content="Shaape - Free Abstract SVG Shapes & Grainy Vectors" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -157,6 +160,7 @@ const finalJsonLd = jsonLd || defaultJsonLd;
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={image} />
+    <meta name="twitter:image:alt" content="Shaape - Free Abstract SVG Shapes & Grainy Vectors" />
 
     <!-- Favicon & Icons -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

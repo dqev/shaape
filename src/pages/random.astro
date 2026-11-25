@@ -9,6 +9,7 @@ import '../styles/global.css';
 const title = "Random Shape Generator | Shaape - Infinite Abstract SVG Shapes";
 const description = "Generate infinite unique abstract SVG vector shapes with procedural lighting, grainy noise gradients, and 3D tilt. Copy SVG code or export in 4x PNG.";
 const canonicalURL = "https://shaape.co/random";
+const image = "https://shaape.co/og.png";
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -67,7 +68,7 @@ const jsonLd = {
 };
 ---
 
-<BaseLayout title={title} description={description} canonicalURL={canonicalURL} jsonLd={jsonLd}>
+<BaseLayout title={title} description={description} canonicalURL={canonicalURL} image={image} jsonLd={jsonLd}>
   <Header />
   <Container>
     <MainApp client:visible initialView="random" />

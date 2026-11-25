@@ -31,9 +31,11 @@
   --selection-color: #111111;
   --selection-bg: #efefef;
 
-  /* Typography */
-  --font-primary: 'Figtree', -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  /* Typography - Figtree Only (Strict 2 Weights: 400 & 600) */
+  --font-primary: 'Figtree', sans-serif;
+  --font-mono: 'Figtree', sans-serif;
+  --font-regular: 400;
+  --font-bold: 600;
 
   /* Motion & Easings */
   --duration-smooth: .15s;

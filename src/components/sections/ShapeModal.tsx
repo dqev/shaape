@@ -11,6 +11,7 @@ import FluidTabs from '../ui/FluidTabs';
 export interface ShapeModalProps {
   isOpen: boolean;
   shape: ShapeItem | null;
+  triggerElement?: HTMLElement | null;
   initialMode?: string;
   onClose: () => void;
   onPrev?: () => void;
@@ -20,6 +21,7 @@ export interface ShapeModalProps {
 export const ShapeModal: React.FC<ShapeModalProps> = ({
   isOpen,
   shape,
+  triggerElement = null,
   initialMode = 'gradient',
   onClose,
   onPrev,
@@ -38,6 +40,22 @@ export const ShapeModal: React.FC<ShapeModalProps> = ({
   const [copiedFormat, setCopiedFormat] = useState<'svg' | 'jsx' | 'css' | null>(null);
 
   const nativeColorInputRef = useRef<HTMLInputElement | null>(null);
+  const overlayRef = useRef<HTMLDivElement | null>(null);
+  const modalCardRef = useRef<HTMLDivElement | null>(null);
+  const currentTriggerRef = useRef<HTMLElement | null>(null);
+  const isClosingRef = useRef<boolean>(false);
+  const hasAnimatedOpenRef = useRef<boolean>(false);
+  const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const [isRendered, setIsRendered] = useState<boolean>(isOpen);
+  const [currentShapeId, setCurrentShapeId] = useState<string | undefined>(shape?.id);
+  const [isShapeChanging, setIsShapeChanging] = useState<boolean>(false);
+  const isFirstOpenRef = useRef<boolean>(true);
+
+  if (isOpen && !isFirstOpenRef.current && shape?.id && shape.id !== currentShapeId) {
+    setCurrentShapeId(shape.id);
+    setIsShapeChanging(true);
+  }
 
   const currentSvg = shape
     ? buildLiveSvg(
@@ -88,11 +106,44 @@ export const ShapeModal: React.FC<ShapeModalProps> = ({
   };
 
   useEffect(() => {
+    if (triggerElement) {
+      currentTriggerRef.current = triggerElement;
+    }
+  }, [triggerElement]);
+
+  useEffect(() => {
     if (isOpen) {
+      setIsRendered(true);
       setMode(initialMode || 'gradient');
       setActiveTab('preview');
+      setCurrentShapeId(shape?.id);
+      setIsShapeChanging(false);
+      isFirstOpenRef.current = true;
+      const t = setTimeout(() => {
+        isFirstOpenRef.current = false;
+      }, 450);
+      return () => clearTimeout(t);
+    } else {
+      isFirstOpenRef.current = true;
+      setIsShapeChanging(false);
     }
-  }, [isOpen]);
+  }, [isOpen, initialMode]);
+
+  useEffect(() => {
+    if (isShapeChanging) {
+      let r1 = 0;
+      let r2 = 0;
+      r1 = requestAnimationFrame(() => {
+        r2 = requestAnimationFrame(() => {
+          setIsShapeChanging(false);
+        });
+      });
+      return () => {
+        if (r1) cancelAnimationFrame(r1);
+        if (r2) cancelAnimationFrame(r2);
+      };
+    }
+  }, [isShapeChanging]);
 
   useEffect(() => {
     if (shape) {
@@ -104,8 +155,197 @@ export const ShapeModal: React.FC<ShapeModalProps> = ({
   }, [shape?.id]);
 
   useEffect(() => {
+    if (!isRendered || !isOpen || hasAnimatedOpenRef.current) return;
+
+    hasAnimatedOpenRef.current = true;
+    isClosingRef.current = false;
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+
+    const overlay = overlayRef.current;
+    const modalCard = modalCardRef.current;
+    if (!overlay || !modalCard) return;
+
+    const trigger =
+      triggerElement ||
+      currentTriggerRef.current ||
+      (shape ? document.querySelector<HTMLElement>(`[data-shape-id="${shape.id}"]`) : null);
+
+    if (trigger) {
+      currentTriggerRef.current = trigger;
+      const originRect = trigger.getBoundingClientRect();
+
+      if (originRect.width > 0 && originRect.height > 0) {
+        // Lock scroll without layout shift
+        const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+        if (scrollbarWidth > 0) {
+          document.body.style.paddingRight = `${scrollbarWidth}px`;
+        }
+        document.body.style.overflow = 'hidden';
+
+        overlay.style.display = 'flex';
+        overlay.classList.add('is-open');
+
+        // Measure natural rest position of modal card
+        modalCard.style.transition = 'none';
+        modalCard.style.transform = 'translate(0, 0) scale(1)';
+        modalCard.style.opacity = '0';
+
+        const modalRect = modalCard.getBoundingClientRect();
+        const cardCenterX = originRect.left + originRect.width / 2;
+        const cardCenterY = originRect.top + originRect.height / 2;
+        const modalCenterX = modalRect.left + modalRect.width / 2;
+        const modalCenterY = modalRect.top + modalRect.height / 2;
+        const deltaX = Math.round(cardCenterX - modalCenterX);
+        const deltaY = Math.round(cardCenterY - modalCenterY);
+        const modalWidth = modalCard.offsetWidth || modalRect.width || 960;
+        const scaleFactor = Math.min(0.36, Math.max(0.18, originRect.width / modalWidth));
+
+        modalCard.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(${scaleFactor})`;
+        overlay.style.transition = 'none';
+        overlay.style.opacity = '0';
+
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            overlay.style.transition = 'opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1)';
+            overlay.style.opacity = '1';
+            modalCard.style.transition =
+              'transform 0.44s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1)';
+            modalCard.style.transform = 'translate(0, 0) scale(1)';
+            modalCard.style.opacity = '1';
+          });
+        });
+        return;
+      }
+    }
+
+    // Graceful Fallback
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+    if (scrollbarWidth > 0) {
+      document.body.style.paddingRight = `${scrollbarWidth}px`;
+    }
+    document.body.style.overflow = 'hidden';
+    overlay.style.display = 'flex';
+    overlay.classList.add('is-open');
+
+    modalCard.style.transition = 'none';
+    modalCard.style.transform = 'translate(0, 24px) scale(0.96)';
+    modalCard.style.opacity = '0';
+    overlay.style.transition = 'none';
+    overlay.style.opacity = '0';
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        overlay.style.transition = 'opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1)';
+        overlay.style.opacity = '1';
+        modalCard.style.transition =
+          'transform 0.38s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1)';
+        modalCard.style.transform = 'translate(0, 0) scale(1)';
+        modalCard.style.opacity = '1';
+      });
+    });
+  }, [isRendered, isOpen, shape?.id]);
+
+  const handleRequestClose = () => {
+    if (isClosingRef.current) return;
+    isClosingRef.current = true;
+
+    const overlay = overlayRef.current;
+    const modalCard = modalCardRef.current;
+
+    if (!overlay || !modalCard) {
+      hasAnimatedOpenRef.current = false;
+      isClosingRef.current = false;
+      currentTriggerRef.current = null;
+      setIsRendered(false);
+      if (typeof document !== 'undefined') {
+        document.body.style.overflow = '';
+        document.body.style.paddingRight = '';
+      }
+      onClose();
+      return;
+    }
+
+    const trigger =
+      (shape ? document.querySelector<HTMLElement>(`[data-shape-id="${shape.id}"]`) : null) ||
+      currentTriggerRef.current ||
+      triggerElement;
+
+    if (trigger) {
+      const originRect = trigger.getBoundingClientRect();
+      if (originRect.width > 0 && originRect.height > 0) {
+        // Measure real current position of modal card before animating back to trigger
+        const modalRect = modalCard.getBoundingClientRect();
+        const cardCenterX = originRect.left + originRect.width / 2;
+        const cardCenterY = originRect.top + originRect.height / 2;
+        const modalCenterX = modalRect.left + modalRect.width / 2;
+        const modalCenterY = modalRect.top + modalRect.height / 2;
+        const deltaX = Math.round(cardCenterX - modalCenterX);
+        const deltaY = Math.round(cardCenterY - modalCenterY);
+        const modalWidth = modalCard.offsetWidth || modalRect.width || 960;
+        const scaleFactor = Math.min(0.36, Math.max(0.18, originRect.width / modalWidth));
+
+        modalCard.style.transition =
+          'transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s cubic-bezier(0.23, 1, 0.32, 1)';
+        modalCard.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(${scaleFactor})`;
+        modalCard.style.opacity = '0';
+      } else {
+        modalCard.style.transition =
+          'transform 0.24s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s cubic-bezier(0.23, 1, 0.32, 1)';
+        modalCard.style.transform = 'translate(0, 16px) scale(0.97)';
+        modalCard.style.opacity = '0';
+      }
+    } else {
+      modalCard.style.transition =
+        'transform 0.24s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s cubic-bezier(0.23, 1, 0.32, 1)';
+      modalCard.style.transform = 'translate(0, 16px) scale(0.97)';
+      modalCard.style.opacity = '0';
+    }
+
+    overlay.style.transition = 'opacity 0.22s cubic-bezier(0.23, 1, 0.32, 1)';
+    overlay.style.opacity = '0';
+
+    closeTimeoutRef.current = setTimeout(() => {
+      if (overlay) {
+        overlay.style.display = 'none';
+        overlay.classList.remove('is-open');
+      }
+      if (typeof document !== 'undefined') {
+        document.body.style.overflow = '';
+        document.body.style.paddingRight = '';
+      }
+      hasAnimatedOpenRef.current = false;
+      currentTriggerRef.current = null;
+      setIsRendered(false);
+      onClose();
+    }, 280);
+  };
+
+  useEffect(() => {
+    if (!isOpen && isRendered && !isClosingRef.current) {
+      handleRequestClose();
+    }
+    if (isOpen) {
+      isClosingRef.current = false;
+    }
+  }, [isOpen]);
+
+  useEffect(() => {
+    return () => {
+      if (closeTimeoutRef.current) {
+        clearTimeout(closeTimeoutRef.current);
+      }
+      if (typeof document !== 'undefined') {
+        document.body.style.overflow = '';
+      }
+    };
+  }, []);
+
+  useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (!isOpen) return;
+      if (!isOpen || isClosingRef.current) return;
 
       const target = e.target as HTMLElement | null;
       const isInput =
@@ -115,7 +355,8 @@ export const ShapeModal: React.FC<ShapeModalProps> = ({
           target.isContentEditable);
 
       if (e.key === 'Escape') {
-        onClose();
+        e.preventDefault();
+        handleRequestClose();
       } else if (!isInput) {
         if (e.key === 'ArrowLeft' && onPrev) {
           e.preventDefault();
@@ -134,24 +375,10 @@ export const ShapeModal: React.FC<ShapeModalProps> = ({
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, onClose, onPrev, onNext, codeFormat, currentSvg]);
-
-  useEffect(() => {
-    if (typeof document !== 'undefined') {
-      if (isOpen) {
-        document.body.style.overflow = 'hidden';
-      } else {
-        document.body.style.overflow = '';
-      }
-    }
-    return () => {
-      if (typeof document !== 'undefined') {
-        document.body.style.overflow = '';
-      }
-    };
-  }, [isOpen]);
+  }, [isOpen, onPrev, onNext, codeFormat, currentSvg]);
 
   if (!shape) return null;
+  if (!isOpen && !isRendered) return null;
 
   const stageTabs = [
     { id: 'preview', label: 'Preview' },
@@ -172,10 +399,11 @@ export const ShapeModal: React.FC<ShapeModalProps> = ({
 
   return (
     <div
+      ref={overlayRef}
       className={`shape-modal-overlay ${isOpen ? 'is-open' : ''}`.trim()}
       aria-hidden={!isOpen}
       onClick={(e) => {
-        if (e.target === e.currentTarget) onClose();
+        if (e.target === e.currentTarget) handleRequestClose();
       }}
     >
       <div className="shape-modal-outer-wrapper">
@@ -207,6 +435,7 @@ export const ShapeModal: React.FC<ShapeModalProps> = ({
         )}
 
         <SquircleCard
+          ref={modalCardRef}
           radius={32}
           smoothing={60}
           className={`shape-modal-card ${mode === 'grainy' ? 'is-grainy' : ''}`.trim()}
@@ -221,7 +450,7 @@ export const ShapeModal: React.FC<ShapeModalProps> = ({
                 className="modal-icon-btn modal-back-btn"
                 title="Back"
                 aria-label="Close modal"
-                onClick={onClose}
+                onClick={handleRequestClose}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -319,7 +548,7 @@ export const ShapeModal: React.FC<ShapeModalProps> = ({
               )}
 
               <div
-                className={`modal-svg-wrap ${mode === 'grainy' ? 'is-grainy' : ''}`.trim()}
+                className={`modal-svg-wrap ${mode === 'grainy' ? 'is-grainy' : ''} ${isShapeChanging ? 'is-shape-changing' : ''}`.trim()}
                 style={{ display: activeTab === 'preview' ? 'flex' : 'none' }}
                 dangerouslySetInnerHTML={{ __html: currentSvg }}
               />
@@ -394,7 +623,7 @@ export const ShapeModal: React.FC<ShapeModalProps> = ({
               className="sidebar-icon-btn"
               title="Close"
               aria-label="Close modal"
-              onClick={onClose}
+              onClick={handleRequestClose}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

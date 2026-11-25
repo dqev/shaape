@@ -35,12 +35,31 @@ a,
   -webkit-touch-callout: none;
 }
 
+button,
+input,
+optgroup,
+select,
+textarea,
+pre,
+code,
+kbd {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scrollbar-gutter: stable;
+}
+
 html,
 body {
   min-height: 100%;
   color: var(--body);
   background-color: var(--background);
   font-family: var(--font-primary);
+  font-weight: 400;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
