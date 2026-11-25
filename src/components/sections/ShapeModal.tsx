@@ -268,49 +268,50 @@ export const ShapeModal: React.FC<ShapeModalProps> = ({
       return;
     }
 
+    overlay.classList.add('is-closing');
+
     const trigger =
+      (shape ? document.getElementById(`shape-card-${shape.id}`) : null) ||
       (shape ? document.querySelector<HTMLElement>(`[data-shape-id="${shape.id}"]`) : null) ||
       currentTriggerRef.current ||
       triggerElement;
 
+    let targetTransform = 'translate(0, 20px) scale(0.96)';
     if (trigger) {
       const originRect = trigger.getBoundingClientRect();
-      if (originRect.width > 0 && originRect.height > 0) {
-        // Measure real current position of modal card before animating back to trigger
-        const modalRect = modalCard.getBoundingClientRect();
+      const isVisibleInViewport =
+        originRect.width > 0 &&
+        originRect.height > 0 &&
+        originRect.bottom >= 0 &&
+        originRect.top <= window.innerHeight;
+
+      if (isVisibleInViewport) {
         const cardCenterX = originRect.left + originRect.width / 2;
         const cardCenterY = originRect.top + originRect.height / 2;
-        const modalCenterX = modalRect.left + modalRect.width / 2;
-        const modalCenterY = modalRect.top + modalRect.height / 2;
-        const deltaX = Math.round(cardCenterX - modalCenterX);
-        const deltaY = Math.round(cardCenterY - modalCenterY);
-        const modalWidth = modalCard.offsetWidth || modalRect.width || 960;
+        const vpCenterX = window.innerWidth / 2;
+        const vpCenterY = window.innerHeight / 2;
+        const deltaX = Math.round(cardCenterX - vpCenterX);
+        const deltaY = Math.round(cardCenterY - vpCenterY);
+        const modalWidth = modalCard.offsetWidth || 960;
         const scaleFactor = Math.min(0.36, Math.max(0.18, originRect.width / modalWidth));
-
-        modalCard.style.transition =
-          'transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s cubic-bezier(0.23, 1, 0.32, 1)';
-        modalCard.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(${scaleFactor})`;
-        modalCard.style.opacity = '0';
-      } else {
-        modalCard.style.transition =
-          'transform 0.24s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s cubic-bezier(0.23, 1, 0.32, 1)';
-        modalCard.style.transform = 'translate(0, 16px) scale(0.97)';
-        modalCard.style.opacity = '0';
+        targetTransform = `translate(${deltaX}px, ${deltaY}px) scale(${scaleFactor})`;
       }
-    } else {
-      modalCard.style.transition =
-        'transform 0.24s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s cubic-bezier(0.23, 1, 0.32, 1)';
-      modalCard.style.transform = 'translate(0, 16px) scale(0.97)';
-      modalCard.style.opacity = '0';
     }
 
-    overlay.style.transition = 'opacity 0.22s cubic-bezier(0.23, 1, 0.32, 1)';
-    overlay.style.opacity = '0';
+    requestAnimationFrame(() => {
+      overlay.style.transition = 'opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1)';
+      overlay.style.opacity = '0';
+      modalCard.style.transition =
+        'transform 0.38s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.30s cubic-bezier(0.16, 1, 0.3, 1)';
+      modalCard.style.transform = targetTransform;
+      modalCard.style.opacity = '0';
+    });
 
     closeTimeoutRef.current = setTimeout(() => {
       if (overlay) {
         overlay.style.display = 'none';
         overlay.classList.remove('is-open');
+        overlay.classList.remove('is-closing');
       }
       if (typeof document !== 'undefined') {
         document.body.style.overflow = '';
@@ -320,7 +321,7 @@ export const ShapeModal: React.FC<ShapeModalProps> = ({
       currentTriggerRef.current = null;
       setIsRendered(false);
       onClose();
-    }, 280);
+    }, 380);
   };
 
   useEffect(() => {

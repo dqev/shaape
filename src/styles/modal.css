@@ -50,6 +50,11 @@
   opacity: 1;
 }
 
+.shape-modal-overlay.is-closing .modal-outer-nav {
+  opacity: 0 !important;
+  transition: opacity 0.24s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
 .modal-outer-nav:hover {
   background: #e4e4e7;
   color: #18181b;

@@ -27,6 +27,7 @@ export const CatalogCard: React.FC<CatalogCardProps> = ({
       radius={28}
       smoothing={60}
       className="brand-card"
+      id={`shape-card-${shape.id}`}
       data-shape-id={shape.id}
       title="Customize shape"
       onClick={(e) => onOpenModal(shape, e.currentTarget)}
