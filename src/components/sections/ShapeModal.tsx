@@ -446,29 +446,6 @@ export const ShapeModal: React.FC<ShapeModalProps> = ({
         <div className="shape-modal-stage">
           <div className="modal-stage-header">
             <div className="modal-stage-header-left">
-              <button
-                type="button"
-                className="modal-icon-btn modal-back-btn"
-                title="Back"
-                aria-label="Close modal"
-                onClick={handleRequestClose}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <line x1="19" y1="12" x2="5" y2="12"></line>
-                  <polyline points="12 19 5 12 12 5"></polyline>
-                </svg>
-              </button>
-
               <FluidTabs
                 tabs={stageTabs}
                 activeId={activeTab}
